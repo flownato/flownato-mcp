@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.flownato/flownato-mcp",
-  "description": "Read-only mobile UI research: search real app screens, user flows and UI patterns with cited screen evidence.",
+  "description": "Read-only mobile UI research: real app screens, user flows and UI patterns with cited evidence.",
   "repository": {
     "url": "https://github.com/flownato/flownato-mcp",
     "source": "github"
