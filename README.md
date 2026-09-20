@@ -4,7 +4,7 @@ A remote, read-only [Model Context Protocol](https://modelcontextprotocol.io) se
 
 - **Endpoint:** `https://agent.flownato.com/mcp` (Streamable HTTP)
 - **Auth:** OAuth 2.1 authorization code with PKCE. Your browser opens Flownato sign-in and a read-only consent screen. No API keys to paste.
-- **Access:** connecting is free and `whoami` works on any account. Library research tools require a Flownato Premium membership.
+- **Access:** every signed-in Flownato account can use every tool. Free accounts get the same access as on the website: complete journeys that flownato.com marks free, plus the first 3 screens of every other journey. Premium opens every screen.
 - **Website:** https://www.flownato.com/mcp
 
 ## What it does
@@ -22,7 +22,7 @@ Typical questions it can answer with citations:
 
 | Tool | Purpose |
 |---|---|
-| `whoami` | Reports the authenticated membership and client. Works on free accounts. |
+| `whoami` | Reports the authenticated membership, what that tier can see, and the client. |
 | `search_ui_library` | Finds concrete journey examples for a research question. |
 | `search_ui_screens` | Screen-level search with exact interface text matching. |
 | `analyze_ui_pattern` | Measures one screen pattern, UI element, flow pattern or flow action across an optional app or category scope. |
@@ -68,8 +68,11 @@ Discovery documents:
 
 | Plan | What the MCP returns |
 |---|---|
-| Free account | `whoami`, plus a structured Premium-required response from library tools before any catalog query runs |
-| Premium | All eleven tools, metered at a default safety limit of 500 tool calls per UTC day |
+| Not signed in | The endpoint answers `401` with OAuth discovery metadata, so your client opens Flownato sign-in. Creating an account is free. |
+| Free account | All eleven tools. Journeys marked free on flownato.com (up to three per app) return every screen. Other journeys return their first 3 screens; the rest come back with `locked: true`, no asset ID and no image URL. Every result carries an `access` block with the locked counts and an upgrade link, and `get_screen_image` answers `PREMIUM_REQUIRED` for a locked screen. |
+| Premium | All eleven tools with the complete library. |
+
+Both tiers are metered at a default safety limit of 500 tool calls per UTC day.
 
 Prompts, arguments and results are not stored. Screenshot URLs are signed and short lived, and the image endpoint rechecks membership when the image is fetched.
 
