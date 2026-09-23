@@ -1,5 +1,7 @@
 # Flownato MCP
 
+[![MCP Badge](https://lobehub.com/badge/mcp/flownato-flownato-mcp)](https://lobehub.com/mcp/flownato-flownato-mcp)
+
 A remote, read-only [Model Context Protocol](https://modelcontextprotocol.io) server for mobile UI/UX design research. Built for product designers and developers, it gives MCP-compatible assistants (Claude, Cursor, Codex, Windsurf and others) access to Flownato's library of real mobile app screens, user flows and UI patterns, with every answer tied to published screen evidence.
 
 - **Endpoint:** `https://agent.flownato.com/mcp` (Streamable HTTP)
@@ -101,18 +103,25 @@ Returned `resourceRef` objects are arguments to `inspect_ui_resources`; they are
 not entries in the MCP `resources/list` capability. Keep marketplace declarations
 consistent with the server's actual capabilities.
 
-Maintainers can update the existing listing with the official
+The public badge above supports LobeHub's README claim-status check. Prefer this
+public verification route when available. Updating this public listing does not
+justify granting a directory read/write access to private GitHub repositories.
+
+Already verified maintainers can update the existing listing with the official
 [`@lobehub/market-cli`](https://lobehub.com/publish-mcp/skill.md) (Node.js 22 or newer):
 
 ```bash
-# One-time browser authorization, if not already connected:
+# Sign in to LobeHub, then check existing GitHub verification:
 npx -y @lobehub/market-cli login
-npx -y @lobehub/market-cli github connect
-npx -y @lobehub/market-cli plugin claim flownato-flownato-mcp
+npx -y @lobehub/market-cli github status
 
-# Run from this repository after reviewing lhm.plugin.json:
+# Requires ownership verification; run after reviewing lhm.plugin.json:
 npx -y @lobehub/market-cli plugin update --dir "$PWD"
 ```
+
+Review requested permissions before connecting any GitHub account. If a claim or
+update requires broad `repo` or `workflow` access, leave that connection disabled
+and request a narrower verification method from LobeHub.
 
 When tool signatures change, refresh `tools` from the authenticated server's
 `tools/list` response before publishing. Keep `prompts` and `resources` empty
