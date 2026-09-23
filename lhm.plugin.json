@@ -1,0 +1,640 @@
+{
+  "identifier": "flownato-flownato-mcp",
+  "name": "Flownato MCP",
+  "version": "1.0.0",
+  "author": "Flownato",
+  "authorUrl": "https://github.com/flownato",
+  "category": "developer",
+  "description": "Mobile UI/UX design research for designers and developers: search real app screens, compare user flows, and inspect UI patterns with cited screen evidence. Read-only; connects with Flownato OAuth.",
+  "homepage": "https://www.flownato.com/mcp",
+  "cloudEndpoint": "https://agent.flownato.com/mcp",
+  "tags": [
+    "ui-design",
+    "ux-research",
+    "mobile-apps",
+    "design-patterns",
+    "user-flows",
+    "design-tools"
+  ],
+  "tools": [
+    {
+      "name": "whoami",
+      "title": "Flownato account",
+      "description": "Show the authenticated Flownato account's access tier and MCP client identity.",
+      "inputSchema": {
+        "properties": {},
+        "title": "whoamiArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "additionalProperties": true,
+        "title": "whoamiDictOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "search_ui_library",
+      "title": "Search UI library",
+      "description": "Search active published mobile-app journey families for a product moment or UI goal. Returns ordered screens, exact evidence IDs, variants, outcomes, and signed image URLs.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "maxLength": 300,
+            "minLength": 2,
+            "title": "Query",
+            "type": "string"
+          },
+          "app": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "App"
+          },
+          "max_results": {
+            "default": 3,
+            "maximum": 5,
+            "minimum": 1,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_ui_libraryArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "additionalProperties": true,
+        "title": "search_ui_libraryDictOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "analyze_ui_pattern",
+      "title": "Analyze UI pattern",
+      "description": "Measure one observed screen pattern, UI element, flow pattern, or flow action across active published releases. Returns scoped descriptive counts and concrete examples.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "maxLength": 300,
+            "minLength": 2,
+            "title": "Query",
+            "type": "string"
+          },
+          "dimension": {
+            "enum": [
+              "screen_pattern",
+              "ui_element",
+              "flow_pattern",
+              "flow_action"
+            ],
+            "title": "Dimension",
+            "type": "string"
+          },
+          "app": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "App"
+          },
+          "app_category": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "App Category"
+          },
+          "max_examples": {
+            "default": 3,
+            "maximum": 5,
+            "minimum": 1,
+            "title": "Max Examples",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query",
+          "dimension"
+        ],
+        "title": "analyze_ui_patternArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "additionalProperties": true,
+        "title": "analyze_ui_patternDictOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "explore_ui_patterns",
+      "title": "Explore UI patterns",
+      "description": "Discover recurring published screen patterns, UI elements, flow patterns, and flow actions when the exact pattern to analyze is not yet known.",
+      "inputSchema": {
+        "properties": {
+          "dimensions": {
+            "items": {
+              "enum": [
+                "screen_pattern",
+                "ui_element",
+                "flow_pattern",
+                "flow_action"
+              ],
+              "type": "string"
+            },
+            "title": "Dimensions",
+            "type": "array"
+          },
+          "focus": {
+            "anyOf": [
+              {
+                "maxLength": 300,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Focus"
+          },
+          "app_category": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "App Category"
+          },
+          "max_patterns_per_dimension": {
+            "default": 5,
+            "maximum": 8,
+            "minimum": 2,
+            "title": "Max Patterns Per Dimension",
+            "type": "integer"
+          },
+          "max_examples": {
+            "default": 3,
+            "maximum": 5,
+            "minimum": 1,
+            "title": "Max Examples",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "dimensions"
+        ],
+        "title": "explore_ui_patternsArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "additionalProperties": true,
+        "title": "explore_ui_patternsDictOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "compare_ui_flows",
+      "title": "Compare UI flows",
+      "description": "Compare the same product moment across two or three explicitly named published apps. Returns ordered steps, outcomes, boundaries, variants, and exact evidence IDs.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "maxLength": 300,
+            "minLength": 2,
+            "title": "Query",
+            "type": "string"
+          },
+          "apps": {
+            "items": {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Apps",
+            "type": "array"
+          }
+        },
+        "required": [
+          "query",
+          "apps"
+        ],
+        "title": "compare_ui_flowsArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "additionalProperties": true,
+        "title": "compare_ui_flowsDictOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "inspect_app_library",
+      "title": "Inspect app library",
+      "description": "Inspect one explicitly named published app's coverage, patterns, UI elements, flow actions, outcomes, and representative journeys.",
+      "inputSchema": {
+        "properties": {
+          "app": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "App",
+            "type": "string"
+          },
+          "focus": {
+            "anyOf": [
+              {
+                "maxLength": 300,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Focus"
+          },
+          "max_results": {
+            "default": 3,
+            "maximum": 5,
+            "minimum": 1,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "app"
+        ],
+        "title": "inspect_app_libraryArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "additionalProperties": true,
+        "title": "inspect_app_libraryDictOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "inspect_ui_resources",
+      "title": "Inspect exact UI resources",
+      "description": "Reload one to six exact journey or screen references from active published releases. Use this to preserve evidence identity in follow-up analysis instead of reranking it.",
+      "inputSchema": {
+        "$defs": {
+          "ResourceReference": {
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": [
+                  "journey",
+                  "screen"
+                ],
+                "title": "Kind",
+                "type": "string"
+              },
+              "releaseId": {
+                "maxLength": 100,
+                "minLength": 1,
+                "title": "Releaseid",
+                "type": "string"
+              },
+              "appKey": {
+                "maxLength": 100,
+                "minLength": 1,
+                "title": "Appkey",
+                "type": "string"
+              },
+              "key": {
+                "maxLength": 300,
+                "minLength": 1,
+                "title": "Key",
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "releaseId",
+              "appKey",
+              "key"
+            ],
+            "title": "ResourceReference",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "references": {
+            "items": {
+              "$ref": "#/$defs/ResourceReference"
+            },
+            "maxItems": 6,
+            "minItems": 1,
+            "title": "References",
+            "type": "array"
+          }
+        },
+        "required": [
+          "references"
+        ],
+        "title": "inspect_ui_resourcesArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "additionalProperties": true,
+        "title": "inspect_ui_resourcesDictOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "search_ui_screens",
+      "title": "Search UI screens",
+      "description": "Search active published screens for an exact state, component, visible-copy concept, or visual surface without first collapsing matches into journeys.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "maxLength": 300,
+            "minLength": 2,
+            "title": "Query",
+            "type": "string"
+          },
+          "app": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "App"
+          },
+          "max_results": {
+            "default": 5,
+            "maximum": 8,
+            "minimum": 1,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_ui_screensArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "additionalProperties": true,
+        "title": "search_ui_screensDictOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "check_ui_presence",
+      "title": "Check UI pattern presence",
+      "description": "Exhaustively check one resolved UI term across the active published scope. Only an anchored exhaustive result can support a scoped absence statement.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "maxLength": 300,
+            "minLength": 2,
+            "title": "Query",
+            "type": "string"
+          },
+          "app": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "App"
+          },
+          "app_category": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "App Category"
+          },
+          "dimension": {
+            "anyOf": [
+              {
+                "pattern": "^(screen_pattern|ui_element|flow_pattern|flow_action)$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Dimension"
+          },
+          "segments": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 4,
+                "minItems": 2,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Segments"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "check_ui_presenceArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "additionalProperties": true,
+        "title": "check_ui_presenceDictOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "inspect_library_coverage",
+      "title": "Inspect library coverage",
+      "description": "Describe the active published app/category scope and its available screen, element, flow, and action vocabulary.",
+      "inputSchema": {
+        "properties": {
+          "focus": {
+            "anyOf": [
+              {
+                "maxLength": 300,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Focus"
+          },
+          "app_category": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "App Category"
+          },
+          "max_apps": {
+            "default": 50,
+            "maximum": 50,
+            "minimum": 1,
+            "title": "Max Apps",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Offset",
+            "type": "integer"
+          }
+        },
+        "title": "inspect_library_coverageArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "additionalProperties": true,
+        "title": "inspect_library_coverageDictOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "get_screen_image",
+      "title": "View screen image",
+      "description": "Return one published Flownato screen image inline. Use an assetId returned by another Flownato tool; do not guess asset identifiers.",
+      "inputSchema": {
+        "properties": {
+          "asset_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Asset Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "asset_id"
+        ],
+        "title": "get_screen_imageArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ],
+  "prompts": [],
+  "resources": []
+}

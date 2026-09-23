@@ -1,6 +1,6 @@
 # Flownato MCP
 
-A remote, read-only [Model Context Protocol](https://modelcontextprotocol.io) server for mobile UI research. It gives MCP-compatible assistants (Claude, Cursor, Codex, Windsurf and others) access to Flownato's library of real mobile app screens, user flows and UI patterns, with every answer tied to published screen evidence.
+A remote, read-only [Model Context Protocol](https://modelcontextprotocol.io) server for mobile UI/UX design research. Built for product designers and developers, it gives MCP-compatible assistants (Claude, Cursor, Codex, Windsurf and others) access to Flownato's library of real mobile app screens, user flows and UI patterns, with every answer tied to published screen evidence.
 
 - **Endpoint:** `https://agent.flownato.com/mcp` (Streamable HTTP)
 - **Auth:** OAuth 2.1 authorization code with PKCE. Your browser opens Flownato sign-in and a read-only consent screen. No API keys to paste.
@@ -38,7 +38,7 @@ All tools are read-only. Results cite the exact journey and step identifiers the
 
 ## Connect
 
-Claude Desktop, Claude Code, Cursor and most clients accept a remote server entry like this:
+In clients that accept a remote `mcpServers` configuration, use:
 
 ```json
 {
@@ -83,6 +83,43 @@ The server reads only the published product catalog: reviewed, immutable release
 ## Source
 
 This repository documents the hosted service. The server itself is part of Flownato's private product codebase (Python, FastAPI) and is not open source.
+
+## Marketplace metadata
+
+[`lhm.plugin.json`](lhm.plugin.json) declares the existing LobeHub listing's category,
+remote endpoint, and all eleven MCP tool schemas. Its category is `developer`
+(displayed as **Developer Skills** on LobeHub), reflecting its use for UI/UX design
+and product development.
+
+The endpoint requires OAuth before protocol initialization and tool discovery.
+An unauthenticated request returning `401` is expected; use the protected-resource
+metadata above to start sign-in. Directory crawlers cannot discover the tool list
+from an unauthenticated connection alone.
+
+The server currently exposes tools, with no MCP prompt templates or MCP resources.
+Returned `resourceRef` objects are arguments to `inspect_ui_resources`; they are
+not entries in the MCP `resources/list` capability. Keep marketplace declarations
+consistent with the server's actual capabilities.
+
+Maintainers can update the existing listing with the official
+[`@lobehub/market-cli`](https://lobehub.com/publish-mcp/skill.md) (Node.js 22 or newer):
+
+```bash
+# One-time browser authorization, if not already connected:
+npx -y @lobehub/market-cli login
+npx -y @lobehub/market-cli github connect
+npx -y @lobehub/market-cli plugin claim flownato-flownato-mcp
+
+# Run from this repository after reviewing lhm.plugin.json:
+npx -y @lobehub/market-cli plugin update --dir "$PWD"
+```
+
+When tool signatures change, refresh `tools` from the authenticated server's
+`tools/list` response before publishing. Keep `prompts` and `resources` empty
+unless the server implements them. The listing version remains `1.0.0` for this
+metadata correction; it does not represent a new server release. Verify the
+[public listing](https://lobehub.com/mcp/flownato-flownato-mcp?activeTab=score)
+after each update.
 
 ## Links
 
