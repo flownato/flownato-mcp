@@ -1,0 +1,36 @@
+{
+  "name": "flownato",
+  "version": "1.0.0",
+  "description": "Look up how real mobile apps handle a screen or flow before you design it: recorded app journeys, screens and UI patterns from Flownato, with cited evidence.",
+  "author": {
+    "name": "Flownato",
+    "email": "hello@flownato.com",
+    "url": "https://www.flownato.com"
+  },
+  "homepage": "https://www.flownato.com/mcp",
+  "repository": "https://github.com/flownato/flownato-mcp",
+  "license": "MIT",
+  "keywords": ["design", "ui", "ux", "mobile", "user-flows", "design-research", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Flownato",
+    "shortDescription": "See how real mobile apps handle a flow",
+    "longDescription": "Search recorded mobile app journeys, screens and UI patterns, compare the same flow across apps, and cite the exact screens before you design or build.",
+    "developerName": "Flownato",
+    "category": "Creativity",
+    "capabilities": ["Read"],
+    "websiteURL": "https://www.flownato.com",
+    "privacyPolicyURL": "https://www.flownato.com/privacy",
+    "termsOfServiceURL": "https://www.flownato.com/terms",
+    "supportURL": "https://www.flownato.com/mcp",
+    "defaultPrompt": [
+      "Show me how delivery apps handle the address step in checkout.",
+      "Compare onboarding in Swiggy and Zepto before I design ours.",
+      "Find bottom sheets used for store or slot selection."
+    ],
+    "brandColor": "#1F2430",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
+}

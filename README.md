@@ -11,7 +11,7 @@ A remote, read-only [Model Context Protocol](https://modelcontextprotocol.io) se
 
 ## What it does
 
-Flownato records real mobile apps (mostly Indian consumer apps such as Swiggy, Zepto, MakeMyTrip, BookMyShow, Nykaa, plus IKEA and Wikipedia), then publishes reviewed screens, complete journeys and a UI pattern taxonomy. The MCP server lets an assistant search and compare that evidence instead of guessing what an interface looks like.
+Flownato records real mobile apps such as Swiggy, Zepto, BookMyShow, redBus and Nykaa, then publishes reviewed screens, complete journeys and a UI pattern taxonomy. The MCP server lets an assistant search and compare that evidence instead of guessing what an interface looks like.
 
 Typical questions it can answer with citations:
 
@@ -39,6 +39,21 @@ Typical questions it can answer with citations:
 All tools are read-only. Results cite the exact journey and step identifiers they were built from, and pattern counts are descriptive, never presented as best practice.
 
 ## Connect
+
+### Claude Code plugin
+
+The plugin installs the MCP server together with the `flownato-ui-research` skill, which tells the assistant when
+to look up real app flows and how to cite them:
+
+```text
+/plugin marketplace add flownato/flownato-mcp
+/plugin install flownato@flownato
+```
+
+The same repository carries plugin manifests for Cursor (`.cursor-plugin/`) and Codex (`.codex-plugin/`). The skill
+lives in [`skills/flownato-ui-research/SKILL.md`](skills/flownato-ui-research/SKILL.md).
+
+### MCP server only
 
 In clients that accept a remote `mcpServers` configuration, use:
 
@@ -84,7 +99,7 @@ The server reads only the published product catalog: reviewed, immutable release
 
 ## Source
 
-This repository documents the hosted service. The server itself is part of Flownato's private product codebase (Python, FastAPI) and is not open source.
+This repository documents the hosted service and holds its plugin manifests and skill. The server itself is part of Flownato's private product codebase (Python, FastAPI) and is not open source.
 
 ## Marketplace metadata
 

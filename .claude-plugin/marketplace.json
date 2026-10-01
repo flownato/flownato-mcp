@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "flownato",
+  "description": "Flownato mobile UI research skill and read-only MCP tools.",
+  "owner": {
+    "name": "Flownato",
+    "email": "hello@flownato.com",
+    "url": "https://www.flownato.com"
+  },
+  "plugins": [
+    {
+      "name": "flownato",
+      "source": "./",
+      "description": "Look up how real mobile apps handle a screen or flow before you design it: recorded app journeys, screens and UI patterns from Flownato, with cited evidence.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Flownato",
+        "email": "hello@flownato.com"
+      },
+      "homepage": "https://www.flownato.com/mcp",
+      "repository": "https://github.com/flownato/flownato-mcp",
+      "license": "MIT",
+      "category": "design"
+    }
+  ]
+}

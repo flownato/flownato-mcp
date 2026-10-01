@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "flownato": {
+      "type": "http",
+      "url": "https://agent.flownato.com/mcp"
+    }
+  }
+}

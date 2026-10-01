@@ -1,0 +1,19 @@
+{
+  "name": "flownato",
+  "displayName": "Flownato",
+  "version": "1.0.0",
+  "description": "Look up how real mobile apps handle a screen or flow before you design it: recorded app journeys, screens and UI patterns from Flownato, with cited evidence.",
+  "author": {
+    "name": "Flownato",
+    "email": "hello@flownato.com"
+  },
+  "publisher": "Flownato",
+  "homepage": "https://www.flownato.com/mcp",
+  "repository": "https://github.com/flownato/flownato-mcp",
+  "license": "MIT",
+  "logo": "assets/icon.png",
+  "keywords": ["design", "ui", "ux", "mobile", "user-flows", "design-research", "mcp"],
+  "category": "design",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}
